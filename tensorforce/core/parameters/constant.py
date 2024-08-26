@@ -35,13 +35,13 @@ class Constant(Parameter):
     def __init__(self, value, *, name=None, dtype=None, min_value=None, max_value=None):
         if isinstance(value, bool):
             if dtype != 'bool':
-                raise TensorforceError.dtype(name='Constant', argument='value', dtype=type(value))
+                raise TensorforceError.type(name='Constant', argument='value', dtype=type(value))
         elif isinstance(value, int):
             if dtype != 'int':
-                raise TensorforceError.dtype(name='Constant', argument='value', dtype=type(value))
+                raise TensorforceError.type(name='Constant', argument='value', dtype=type(value))
         elif isinstance(value, float):
             if dtype != 'float':
-                raise TensorforceError.dtype(name='Constant', argument='value', dtype=type(value))
+                raise TensorforceError.type(name='Constant', argument='value', dtype=type(value))
         else:
             raise TensorforceError.unexpected()
         if min_value is not None and value < min_value:

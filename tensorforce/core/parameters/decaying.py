@@ -135,12 +135,12 @@ class Decaying(Parameter):
 
         if isinstance(initial_value, int):
             if dtype != 'int':
-                raise TensorforceError.dtype(
+                raise TensorforceError.type(
                     name='Decaying', argument='initial_value', dtype=type(initial_value)
                 )
         elif isinstance(initial_value, float):
             if dtype != 'float':
-                raise TensorforceError.dtype(
+                raise TensorforceError.type(
                     name='Decaying', argument='initial_value', dtype=type(initial_value)
                 )
         else:
