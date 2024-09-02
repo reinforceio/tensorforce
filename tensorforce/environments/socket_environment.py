@@ -78,7 +78,7 @@ class SocketEnvironment(RemoteEnvironment):
         str_result = b''
         for n in range(num_bytes // cls.MAX_BYTES):
             str_result += connection.recv(cls.MAX_BYTES)
-            if len(str_result) != n * cls.MAX_BYTES:
+            if len(str_result) != (n + 1) * cls.MAX_BYTES:
                 raise TensorforceError.unexpected()
         str_result += connection.recv(num_bytes % cls.MAX_BYTES)
         if len(str_result) != num_bytes:
@@ -115,7 +115,7 @@ class SocketEnvironment(RemoteEnvironment):
         str_function = b''
         for n in range(num_bytes // cls.MAX_BYTES):
             str_function += connection.recv(cls.MAX_BYTES)
-            if len(str_function) != n * cls.MAX_BYTES:
+            if len(str_function) != (n + 1) * cls.MAX_BYTES:
                 raise TensorforceError.unexpected()
         str_function += connection.recv(num_bytes % cls.MAX_BYTES)
         if len(str_function) != num_bytes:
