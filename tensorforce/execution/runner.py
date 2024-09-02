@@ -78,7 +78,8 @@ class Runner(object):
 
     def __init__(
         self, agent, environment=None, max_episode_timesteps=None, num_parallel=None,
-        environments=None, evaluation=False, remote=None, blocking=False, host=None, port=None
+        environments=None, evaluation=False, remote=None, blocking=False, host=None, port=None,
+        **kwargs
     ):
         if environment is None and environments is None:
             if remote != 'socket-client':
@@ -167,7 +168,7 @@ class Runner(object):
         self.is_environment_external = isinstance(environments[0], Environment)
         environment = Environment.create(
             environment=environments[0], max_episode_timesteps=max_episode_timesteps,
-            remote=remote, blocking=blocking, host=host[0], port=port[0]
+            remote=remote, blocking=blocking, host=host[0], port=port[0], **kwargs
         )
         self.is_environment_remote = isinstance(environment, RemoteEnvironment)
         states = environment.states()
@@ -191,7 +192,7 @@ class Runner(object):
             assert isinstance(environment, Environment) == self.is_environment_external
             environment = Environment.create(
                 environment=environment, max_episode_timesteps=max_episode_timesteps,
-                remote=remote, blocking=blocking, host=host[n], port=port[n]
+                remote=remote, blocking=blocking, host=host[n], port=port[n], **kwargs
             )
             assert isinstance(environment, RemoteEnvironment) == self.is_environment_remote
             assert util.is_equal(x=environment.states(), y=states)
